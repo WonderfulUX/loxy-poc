@@ -10,11 +10,12 @@ const podcastCTN = document.querySelector('.podcast-container')
 const podcastTITLE = document.querySelector('.podcast-title')
 const podcastLINK = document.querySelector('.podcast-link')
 
-const onStageCTN = document.querySelector('.onStage-container')
-const onStageTITLE = document.querySelector('.onStage-title')
-const onStageLINK = document.querySelector('.onStage-link')
+const onstageCTN = document.querySelector('.onstage-container')
+const onstageTITLE = document.querySelector('.onstage-title')
+const onstageLINK = document.querySelector('.onstage-link')
 
 const cultureTITLE = document.querySelector('.main-title')
+const logo = document.querySelector('#logo')
 
 export{
     interviewCTN,
@@ -26,8 +27,9 @@ export{
     podcastCTN,
     podcastTITLE,
     podcastLINK,
-    onStageCTN,
-    onStageTITLE,
-    onStageLINK,
-    cultureTITLE
+    onstageCTN,
+    onstageTITLE,
+    onstageLINK,
+    cultureTITLE,
+    logo
 }

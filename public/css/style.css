@@ -34,7 +34,7 @@ body{
     font-family: "Metropolis",sans-serif;
     background: #111;
     color: white;
-    background: url('./assets/svg/noise.svg') var(--pink);
+    background: url('../assets/svg/noise.svg') var(--pink);
     background-size: 200px;
     animation: body 32s linear infinite;
 }
@@ -111,6 +111,7 @@ body{
     width: 100%;
     height: 100vh;
     background: blue;
+    margin-bottom: 60px;
 }
 
 .pan{
@@ -124,7 +125,7 @@ body{
 .growing{
     width: 100%;
     height: 100%;
-    background: url('./assets/svg/noise.svg') var(--pink);
+    background: url('../assets/svg/noise.svg') var(--pink);
     background-size: 200px;
     position: absolute;
     top: 50%;
@@ -175,17 +176,97 @@ h2{
     letter-spacing: -4%;
     margin-bottom: 12px;
 }
-.interview-title{
+.interview-title,
+#interviews h3{
     color: var(--yellow);
 }
-.oneShots-title{
+.oneShots-title,
+#oneshots h3{
     color: var(--green);
 }
-.podcast-title{
+.podcast-title,
+#podcast h3{
     color: var(--orange);
 }
-.onStage-title{
+.onstage-title,
+#onstage h3{
     color: var(--pink);
+}
+
+/* .feed-section{
+    position: relative;
+} */
+
+.title-container{
+    display: flex;
+    overflow: hidden;
+    /* width: fit-content; */
+    position: relative;
+}
+
+.feed-section h2,
+.feed-section h3{
+    text-transform: uppercase;
+    letter-spacing: -5%;
+}
+
+
+.feed-section h2{
+    font-size: 15vw;
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    width: fit-content;
+    z-index: 10;
+}
+.feed-section h3{
+    display: flex;
+    font-size: 30vw;
+    white-space: nowrap;
+    animation: translate100 120s linear infinite;
+    width: fit-content;
+    opacity: .3;
+    font-weight: 700;
+}
+
+.feed-section h3::after{
+    content: attr(data-title);
+    display: block;
+}
+.feed-section h3::after,
+.feed-section span{
+    margin-left: 100vw;
+}
+
+@keyframes translate100{
+    to{
+        translate: -100% 0;
+    }
+}
+
+.pageLink{
+    margin: 80px auto;
+    display: block;
+    width: 300px;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    background: #00000010;
+    font-weight: 500;
+    letter-spacing: 4%;
+    text-transform: uppercase;
+}
+
+#interviews .pageLink{
+    border: 2px solid var(--yellow);
+}
+
+#oneshots .pageLink{
+    border: 2px solid var(--green);
+}
+#podcast .pageLink{
+    border: 2px solid var(--orange);
 }
 
 .link-to{
@@ -229,7 +310,7 @@ video{
     overflow: hidden;
 }
 .interview-title,
-.onStage-title,
+.onstage-title,
 .podcast-title,
 .main-title,
 .oneShots-title{
@@ -240,10 +321,10 @@ video{
                 opacity 1s linear;
     
 }
-.middle{
-    top: 0%;
+.main-title{
+    bottom: 20%;
     left: 50%;
-    translate: -50% 100%;
+    translate: -50% 0%;
     font-size: 24px;
     font-weight: 400;
     letter-spacing: 80%;
@@ -390,7 +471,7 @@ video{
 
 
 
-.onStage-container{
+.onstage-container{
     top: 50%;
     left: 50%;
     translate: -50% -50%;
@@ -398,35 +479,69 @@ video{
     height: 0;
 }
 
-.anim.onStage-container{
-    animation: onStageBlockAnim 6s var(--delay)  cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+.anim.onstage-container{
+    animation: onstageBlockAnim 6s var(--delay)  cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
-.anim.onStage-title{
-    animation: onStageTextAnim 6s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+.anim.onstage-title{
+    animation: onstageTextAnim 6s cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
 }
-.anim.hiddenlink.onStage-link{
+.anim.hiddenlink.onstage-link{
     animation: linkAnim 6s var(--linkdelay) cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
     border: 2px solid var(--pink);
 }
 
 
-@keyframes onStageBlockAnim{
+@keyframes onstageBlockAnim{
     25%,80%{ height: 100%;}
     95%{width: 100%;}
     100%{ height: 0%; width: 0;}
 }
 
-@keyframes onStageTextAnim{
+@keyframes onstageTextAnim{
     15%,89%{  opacity: 1; translate: -50% 50%; }
     90%{  translate: -50% 150%; }
 }
 
 
 .anim.main-title{
-    animation: mainTextAnim 3s var(--linkdelay) cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+    animation: mainTextAnim 3s var(--delay) cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+}
+#logo{
+    z-index: 50;
+    scale: 1;
+    transition: translate .8s .3s cubic-bezier(0.05, 1, 0.3, 0.97)  ,scale .8s cubic-bezier(0.05, 1, 0.3, 0.97);
+}
+.anim#logo{
+    scale: 3; 
+    translate: 0 30%;
+    transition: translate 1.6s cubic-bezier(0.74, 0.04, 0.18, 1.01) ,scale 1s .3s cubic-bezier(0.74, 0.04, 0.18, 1.01) ;
 }
 
 @keyframes mainTextAnim{
     20%,90%{  opacity: 1; }
     100%{  opacity:0; }
+}
+
+@keyframes logoAnim{
+    20%,50%{  scale: 3; translate: 0 30%; }
+    100%{  scale: 1; translate: 0 0; }
+}
+
+.feed-grid{
+    display: grid;
+    grid-template-rows: repeat(3,75vh);
+    grid-template-columns: repeat(3,1fr);
+    gap: 5px;
+    width: 98%;
+    margin: 0 auto;
+}
+
+.feed-element{
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF50;
+}
+
+section{
+    padding-top: 60px ;
 }
