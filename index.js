@@ -1,3 +1,20 @@
+import {
+    interviewCTN,
+    interviewTITLE,
+    interviewLINK,
+    oneShotsCTN,
+    oneShotsTITLE,
+    oneShotsLINK,
+    podcastCTN,
+    podcastTITLE,
+    podcastLINK,
+    onStageCTN,
+    onStageTITLE,
+    onStageLINK,
+    cultureTITLE
+
+} from './elements.js'
+
 window.addEventListener("load", ()=>{
     setTimeout(() => {
         requestAnimationFrame(animInterviewBlock)
@@ -6,74 +23,56 @@ window.addEventListener("load", ()=>{
 })
 
 
-async function animInterviewBlock(){
-    document.querySelector('.interview-title').classList.add('anim')
-    setTimeout(()=>{
-        document.querySelector('.interview-container').classList.add('anim')
-    },800)
-    setTimeout(()=>{
-        document.querySelector('.interview-link').classList.add('anim')
-    },300)
-    document.querySelector('.interview-title').addEventListener('animationend',()=>{
-        setTimeout(()=>{
-            requestAnimationFrame(animOneShotsBlock)
-        },500)
-    })
+
+function animInterviewBlock(){
+    animBlock(interviewTITLE,interviewCTN, interviewLINK, animOneShotsBlock)
 }
 
-async function animOneShotsBlock(){
-    document.querySelector('.oneShots-title').classList.add('anim')
-    setTimeout(()=>{
-        document.querySelector('.oneShots-container').classList.add('anim')
-    },800)
-    setTimeout(()=>{
-        document.querySelector('.oneShots-link').classList.add('anim')
-    },300)
-    document.querySelector('.oneShots-title').addEventListener('animationend',()=>{
-        setTimeout(()=>{
-            requestAnimationFrame(animPodcastBlock)
-        },500)
-    })
-}
-async function animPodcastBlock(){
-    document.querySelector('.podcast-title').classList.add('anim')
-    setTimeout(()=>{
-        document.querySelector('.podcast-container').classList.add('anim')
-    },800)
-    setTimeout(()=>{
-        document.querySelector('.podcast-link').classList.add('anim')
-    },300)
-    document.querySelector('.podcast-title').addEventListener('animationend',()=>{
-        setTimeout(()=>{
-            requestAnimationFrame(animOnStageBlock)
-        },500)
-        
-    })
-}
-async function animOnStageBlock(){
-    document.querySelector('.onStage-title').classList.add('anim')
-    setTimeout(()=>{
-        document.querySelector('.onStage-container').classList.add('anim')
-    },800)
-    setTimeout(()=>{
-        document.querySelector('.onStage-link').classList.add('anim')
-    },300)
-    document.querySelector('.onStage-title').addEventListener('animationend',()=>{
-        setTimeout(()=>{
-            requestAnimationFrame(animMain)
-        },500)
-    })
+function animOneShotsBlock(){
+    resetAnimElements()
+    animBlock(oneShotsTITLE,oneShotsCTN, oneShotsLINK, animPodcastBlock)
 }
 
-async function animMain(){
-    console.log(document.querySelectorAll('.anim'))
-    document.querySelector('.main-title').classList.add('anim')
-    document.querySelector('.main-title').addEventListener('animationend',()=>{
-        document.querySelectorAll('.anim').forEach( ele =>{
-            ele.classList.remove('anim')
-        })
+function animPodcastBlock(){
+    resetAnimElements()
+    animBlock(podcastTITLE,podcastCTN, podcastLINK,animOnStageBlock)
+}
+
+function animOnStageBlock(){
+    resetAnimElements()
+    animBlock(onStageTITLE,onStageCTN,onStageLINK,animLast)
+}
+
+
+function animLast(){
+    cultureTITLE.classList.add('anim')
+    cultureTITLE.addEventListener('animationend',()=>{
+        resetAnimElements()
         setTimeout(()=>{
             requestAnimationFrame(animInterviewBlock)
-        })
+        },500)
+    })
+}
+
+
+
+async function animBlock(container,title,link, nextFunction){
+    title.classList.add('anim')
+    setTimeout(()=>{ container.classList.add('anim') },800)
+    setTimeout(()=>{ link.classList.add('anim') },300)
+    
+    title.addEventListener('animationend',e=>{ requestNext(e,nextFunction) })
+}
+
+function requestNext( ele,nextFunction ){
+    setTimeout(()=>{ 
+        requestAnimationFrame(nextFunction)
+        ele.target.removeEventListener('animationend',e => requestNext(e,nextFunction) )
+     },500)
+}
+
+function resetAnimElements(){
+    document.querySelectorAll('.anim').forEach( ele =>{
+        ele.classList.remove('anim')
     })
 }
