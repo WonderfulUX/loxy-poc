@@ -2,3 +2,4 @@ hidden/
 *.mp4
 node_modules/
 project_dump.txt
+.env
