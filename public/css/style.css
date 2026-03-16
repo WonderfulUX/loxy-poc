@@ -12,6 +12,9 @@
 }
 html{
     scroll-behavior: smooth;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
 }
 
 *,::after,::before{
@@ -28,6 +31,7 @@ a{
 button{
     border: none;
     background: none;
+    cursor: pointer;
 }
 
 body{
@@ -36,7 +40,41 @@ body{
     color: white;
     background: url('../assets/svg/noise.svg') var(--pink);
     background-size: 200px;
-    animation: body 32s linear infinite;
+    animation: body 32s ease-in-out infinite;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.nav-backdrop.display{
+    width: 100%;
+}
+.nav-backdrop{
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 0%;
+    background: #111111EE;
+    z-index: 90;
+}
+nav{
+    width: 240px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    translate: 100% 0;
+    background: white;
+    z-index: 50;
+}
+nav.slideIn{
+    translate: 0 0 ;
+    transition: translate .8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+body.locked{
+    overflow: hidden;
 }
 
 
@@ -52,23 +90,23 @@ body{
     left: 15px;
     top: 15px;
     border-radius: 30px;
-    z-index: 100;
+    z-index: 80;
 }
 .socials svg{
     width: 20px;
 }
 
-.nav{
+.nav-buttons{
     position: fixed;
     top: 15px;
-    right: 15px;
-    padding: 10px 20px;
+    right: 30px;
+    padding: 5px 10px 5px 20px;
     z-index: 100;
     background: #00000010;
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     border-radius: 30px;
 }
 
@@ -81,6 +119,9 @@ body{
     height: 4px;
     background: white;
     border-radius: 30px;
+    transition: translate .25s cubic-bezier(0.19, 1, 0.22, 1),
+                rotate .5s cubic-bezier(0.19, 1, 0.22, 1),
+                scale .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 #menu-toggle{
@@ -88,6 +129,31 @@ body{
     flex-direction: column;
     align-items: center;
     gap: 4px;
+    padding: 10px;
+}
+
+.toggle .top-line,
+.toggle .bot-line {
+    transition-delay: .25s;
+}
+.toggle .top-line {
+    rotate: 45deg;
+    translate: 0 8px;
+    scale: 1.2 1;
+    transform-origin: center;
+}
+.toggle .bot-line {
+    rotate: -45deg;
+    translate: 0 -8px;
+    scale: 1.2 1;
+    transform-origin: center;
+}
+/* .display .bot-line{
+    rotate: -45deg;
+    translate: 0 -6px;
+} */
+.toggle .mid-line{
+    translate: 300%;
 }
 
 #search{
@@ -110,8 +176,6 @@ body{
 .full-screen-container{
     width: 100%;
     height: 100vh;
-    background: blue;
-    margin-bottom: 60px;
 }
 
 .pan{
@@ -131,17 +195,14 @@ body{
     top: 50%;
     left: 50%;
     translate: -50% -50%;
-    animation: bgExpand 32s linear infinite;
+    animation: body 32s ease-in-out infinite,
+                expand 8s linear infinite;
 }
 
-@keyframes bgExpand{
-    20%{ background-color: var(--pink); }
-    40%{ background-color: var(--blue); }
-    50%{ scale: 1.5; }
-    60%{ background-color: var(--green); }
-    80%{ background-color: var(--orange); }
-    100%{ scale: 1; }
+@keyframes expand{
+    to{ scale: 1.5; }
 }
+
 @keyframes body{
     20%{ background-color: var(--pink); }
     40%{ background-color: var(--blue); }
@@ -174,8 +235,8 @@ h2{
     text-align: center;
     width: 100%;
     letter-spacing: -4%;
-    margin-bottom: 12px;
 }
+
 .interview-title,
 #interviews h3{
     color: var(--yellow);
@@ -193,9 +254,9 @@ h2{
     color: var(--pink);
 }
 
-/* .feed-section{
-    position: relative;
-} */
+.hero-titles{
+    margin-bottom: 12px;
+}
 
 .title-container{
     display: flex;
@@ -227,6 +288,8 @@ h2{
     width: fit-content;
     opacity: .3;
     font-weight: 700;
+    position: relative;
+    top: 5vw;
 }
 
 .feed-section h3::after{
@@ -251,36 +314,44 @@ h2{
     line-height: 50px;
     text-align: center;
     border-radius: 30px;
-    backdrop-filter: blur(10px);
-    background: #00000010;
-    font-weight: 500;
+    /* backdrop-filter: blur(10px); */
+    font-weight: 600;
     letter-spacing: 4%;
     text-transform: uppercase;
+    border: 3px solid;
+    font-size: 18px;
 }
 
+/* .anim.hiddenlink.interview-link, */
 #interviews .pageLink{
-    border: 2px solid var(--yellow);
+    border-color: var(--yellow);
 }
 
+/* .anim.hiddenlink.oneshots-link, */
 #oneshots .pageLink{
-    border: 2px solid var(--green);
+    border-color: var(--green);
 }
+/* .anim.hiddenlink.podcast-link, */
 #podcast .pageLink{
-    border: 2px solid var(--orange);
+    border-color: var(--orange);
+}
+/* .anim.hiddenlink.onstage-link, */
+#onstage .pageLink{
+    border-color: var(--pink);
 }
 
 .link-to{
     display: inline-block;
-    width: 350px;
+    width: 100%;
     text-align: center;
-    font-size: 18px;
+    font-size: 24px;
     letter-spacing: 4%;
     font-weight: 600;
     overflow: hidden;
     position: relative;
     height: 54px;
     text-transform: uppercase;
-    /* filter: drop-shadow(0 0 4px black); */
+    filter: drop-shadow(0 0 20px #00000050);
 }
 
 .hiddenlink{
@@ -293,7 +364,7 @@ h2{
     border-radius: 30px;
     opacity: 0;
     transition: translate .5s linear;
-    backdrop-filter: blur(5px);
+    /* backdrop-filter: blur(5px); */
     line-height: 50px;
 }
 
@@ -312,7 +383,6 @@ video{
 .interview-title,
 .onstage-title,
 .podcast-title,
-.main-title,
 .oneShots-title{
     position: absolute;
     width: 100%;
@@ -322,12 +392,12 @@ video{
     
 }
 .main-title{
-    bottom: 20%;
-    left: 50%;
-    translate: -50% 0%;
+    text-align: center;
     font-size: 24px;
     font-weight: 400;
     letter-spacing: 80%;
+    text-transform: uppercase;
+    opacity: 0;
 }
 .top{
     top: 50%;
@@ -394,7 +464,6 @@ video{
 
 .anim.hiddenlink.interview-link{
     animation: linkAnim 6s var(--linkdelay) cubic-bezier(0.075, 0.82, 0.165, 1) ;
-    border: 2px solid var(--yellow);
 }
 
 @keyframes interviewBlockAnim{
@@ -426,7 +495,6 @@ video{
 }
 .anim.hiddenlink.oneShots-link{
     animation: linkAnim 6s var(--linkdelay) cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-    border: 2px solid var(--green);
 }
 
 
@@ -455,7 +523,6 @@ video{
 }
 .anim.hiddenlink.podcast-link{
     animation: linkAnim 6s var(--linkdelay) cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-    border: 2px solid var(--orange);
 }
 
 
@@ -487,7 +554,6 @@ video{
 }
 .anim.hiddenlink.onstage-link{
     animation: linkAnim 6s var(--linkdelay) cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
-    border: 2px solid var(--pink);
 }
 
 
@@ -509,12 +575,12 @@ video{
 #logo{
     z-index: 50;
     scale: 1;
-    transition: translate .8s .3s cubic-bezier(0.05, 1, 0.3, 0.97)  ,scale .8s cubic-bezier(0.05, 1, 0.3, 0.97);
+    transition: translate 1.2s .15s cubic-bezier(1, 0, 0.58, 1), scale 1.1s cubic-bezier(0.84, 0.1, 0.58, 1);
 }
 .anim#logo{
     scale: 3; 
-    translate: 0 30%;
-    transition: translate 1.6s cubic-bezier(0.74, 0.04, 0.18, 1.01) ,scale 1s .3s cubic-bezier(0.74, 0.04, 0.18, 1.01) ;
+    translate: 0 120%;
+    transition: translate 1.6s cubic-bezier(0.74, 0.04, 0.18, 1.01) ,scale 1s .5s cubic-bezier(0.74, 0.04, 0.18, 1.01) ;
 }
 
 @keyframes mainTextAnim{
@@ -535,13 +601,86 @@ video{
     width: 98%;
     margin: 0 auto;
 }
+.landscape-grid{
+    display: grid;
+    grid-template-rows: repeat(3,auto);
+    grid-template-columns: repeat(2,1fr);
+    gap: 5px;
+    width: 98%;
+    margin: 0 auto;
+}
+
+iframe{
+    width: 100%;
+}
 
 .feed-element{
     width: 100%;
-    height: 100%;
-    background: #FFFFFF50;
+    aspect-ratio: 9 / 16;
+}
+
+#interviews .feed-element{
+    aspect-ratio: 16 / 9;
+    position: relative;
+}
+.feed-element img{
+    z-index: 10;
+}
+.podcast-element{
+    width: 500px;
+    height: 100px;
+    position: relative;
+    margin: 0 auto 30px;
+}
+
+.loading .feed-element,
+.loading .podcast-element{
+    animation: loading 3s linear infinite;
+}
+
+.loading .feed-element:nth-of-type(2),
+.loading .podcast-element:nth-of-type(2){
+    animation-delay: .2s;
+}
+
+.loading .feed-element:nth-of-type(3),
+.loading .podcast-element:nth-of-type(3){
+    animation-delay: .4s;
+}
+
+.loading .feed-element:nth-of-type(4),
+.loading .podcast-element:nth-of-type(4){
+    animation-delay: .6s;
+}
+
+.loading .feed-element:nth-of-type(5),
+.loading .podcast-element:nth-of-type(5){
+    animation-delay: .8s;
+}
+
+.loading .feed-element:nth-of-type(6),
+.loading .podcast-element:nth-of-type(6){
+    animation-delay: 1s;
+}
+.loading .feed-element:nth-of-type(7){
+    animation-delay: 1.2s;
+}
+.loading .feed-element:nth-of-type(8){
+    animation-delay: 1.4s;
+}
+.loading .feed-element:nth-of-type(9){
+    animation-delay: 1.6s;
 }
 
 section{
     padding-top: 60px ;
+}
+
+@keyframes loading{
+    15%{
+        background: #ffffff30;
+    }
+    30%,100%{
+        background: #ffffff00;
+    }
 }

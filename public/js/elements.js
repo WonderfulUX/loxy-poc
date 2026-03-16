@@ -17,6 +17,10 @@ const onstageLINK = document.querySelector('.onstage-link')
 const cultureTITLE = document.querySelector('.main-title')
 const logo = document.querySelector('#logo')
 
+const menuBackdrop = document.querySelector('.nav-backdrop')
+const menuToggle = document.getElementById('menu-toggle')
+
+
 export{
     interviewCTN,
     interviewTITLE,
@@ -31,5 +35,7 @@ export{
     onstageTITLE,
     onstageLINK,
     cultureTITLE,
-    logo
+    logo,
+    menuBackdrop,
+    menuToggle
 }

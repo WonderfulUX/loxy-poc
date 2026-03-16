@@ -54,3 +54,22 @@ function resetAnimElements() {
 }
 
 window.addEventListener("load", () => setTimeout(startSequence, 1000));
+
+
+el.menuToggle.addEventListener('click',toggleMenu)
+el.menuBackdrop.addEventListener('click',toggleMenu)
+
+
+function toggleMenu(e){
+
+    if( e.target.classList.contains('nav-backdrop') 
+        || e.target.classList.contains('toggle')
+        || e.target.classList.contains('menu-line')
+        || e.target.id==='menu-toggle'
+     ){
+         el.menuBackdrop.classList.toggle('display')
+         el.menuToggle.classList.toggle('toggle')
+         document.body.classList.toggle('locked')
+         document.querySelector('nav').classList.toggle('slideIn')
+     }
+}
