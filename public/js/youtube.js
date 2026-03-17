@@ -5,15 +5,19 @@ function start() {
     // clientId and scope are optional if auth is not required.
     // 'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
     // 'scope': 'profile',
-  }).then(()=>{ retrieveFromYT('interviews') },throwRequestError)
-  .then(videosDetailsFromYT, throwRequestError)
-//   .then(()=>{ feedSection(videosArray,'interviews') }, throwRequestError)
+  }).then(()=> retrieveFromYT('interviews'))
+  .then(videosDetailsFromYT)
+  .then(videosArray =>feedSection(videosArray,'interviews'))
 
-//   .then(()=>{ retrieveFromYT('oneshots') }, throwRequestError)
-//   .then(getOnshotsFromYT,throwRequestError)
+  .then(()=> retrieveFromYT('oneshots'))
+  .then(videosDetailsFromYT)
+  .then(videosArray =>feedSection(videosArray,'oneshots'))
 
-//   .then(()=>{ retrieveFromYT('indeh') }, throwRequestError)
-//   .then(getOnshotsFromYT,throwRequestError)
+  .then(()=> retrieveFromYT('indeh'))
+  .then(videosDetailsFromYT)
+  .then(videosArray =>feedSection(videosArray,'indeh'))
+
+  .catch(throwRequestError)
 };
 // 1
 gapi.load('client', start);
@@ -26,7 +30,7 @@ const YTqueryParams = {
     },
     oneshots : {
         playlistId: "PL70fD2645rWn2Zurq2WmSQ-2bPH0NOA2F",
-        maxResults: 9,
+        maxResults: 6,
     },
     indeh : {
         playlistId: "PL70fD2645rWnPn1k_6CVvXMZI0a4G8BvB",
@@ -35,31 +39,23 @@ const YTqueryParams = {
 }
 
 
-async function retrieveFromYT(sectionName){
-    const{ playlistId,maxResults} = YTqueryParams[sectionName]
-    console.log('retrieving');
-    console.log(playlistId,maxResults,sectionName);
-    // console.log(`https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${playlistId}&part=snippet,id,contentDetails,status&maxResults=${maxResults}`)
-    
-    
+function retrieveFromYT(sectionName){
+    const{ playlistId,maxResults} = YTqueryParams[sectionName]     // console.log('retrieving'); // console.log(playlistId,maxResults,sectionName);    
     return gapi.client.request({
-        'path': `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PL70fD2645rWljll6GoR9Izpr_qd7eK7o4&part=snippet,id,contentDetails,status&maxResults=6`,
+        'path': `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${playlistId}&part=snippet,id,contentDetails,status&maxResults=${maxResults}`,
     })
 }
 
 async function videosDetailsFromYT(response){
-    console.log(response);
-    const items = response.result.items
-    
+    const items = response.result.items     // console.log(items);
     const idList =  retrieveVideoIds(items)
-    // return gapi.client.request({
-    //     'path': `https://www.googleapis.com/youtube/v3/videos?id=${idList}&part=contentDetails,id,liveStreamingDetails,localizations,paidProductPlacementDetails,player,recordingDetails,snippet,statistics,status,topicDetails`,
-    // })
+    return gapi.client.request({
+        'path': `https://www.googleapis.com/youtube/v3/videos?id=${idList}&part=contentDetails,id,liveStreamingDetails,localizations,paidProductPlacementDetails,player,recordingDetails,snippet,statistics,status,topicDetails`,
+    })
 }
 
 function feedSection(videosArray,sectionName){
-    const videos = videosArray.result.items
-    
+    const videos = videosArray.result.items // console.log(videos);
     for(let i=0; i<videos.length ; i++){
         document.querySelectorAll(`#${sectionName} .feed-element`)[i].innerHTML 
         = videos[i].player.embedHtml.replace('//','https://')
@@ -67,37 +63,7 @@ function feedSection(videosArray,sectionName){
 }
 
 
-// OOOOOOOLD
 
-
-// function getOnshotsFromYT(){
-//     return gapi.client.request({
-//         'path': 'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PL70fD2645rWn2Zurq2WmSQ-2bPH0NOA2F&part=snippet,id,contentDetails,status&maxResults=9',
-//     })
-// }
-// function getInterviewsFromYT(){
-//     return gapi.client.request({
-//         'path': 'https://www.googleapis.com/youtube/v3/playlistItems?playlistId=PL70fD2645rWljll6GoR9Izpr_qd7eK7o4&part=snippet,id,contentDetails,status&maxResults=6',
-//     })
-// }
-
-
-// function getInterviews(response){
-//     const items = response.result.items
-//     const idList =  retrieveVideoIds(items)
-//     return gapi.client.request({
-//         'path': `https://www.googleapis.com/youtube/v3/videos?id=${idList}&part=contentDetails,id,liveStreamingDetails,localizations,paidProductPlacementDetails,player,recordingDetails,snippet,statistics,status,topicDetails`,
-//     })
-// }
-
-// function feedInterviews(videosArray){
-//     const videos = videosArray.result.items
-    
-//     for(let i=0; i<videos.length ; i++){
-//         document.querySelectorAll('#interviews .landscape-element')[i].innerHTML 
-//         = videos[i].player.embedHtml.replace('//','https://')
-//     }
-// }
 
 
 
@@ -108,18 +74,11 @@ function retrieveVideoIds(items){
         idList.push(item.contentDetails.videoId)
     })
     
-    console.log(`IDs LIST
-        ${idList.join()}`)
+    // console.log(`IDs LIST
+    //     ${idList.join()}`)
     return idList.join()
 }
 
-
-// LOGS
-function logResponseItems(response){
-    const {items} = response.result;
-    console.log(items)
-    return items
-}
 function throwRequestError(reason){
     console.log('Error: ' + reason.result.error.message);
 }
