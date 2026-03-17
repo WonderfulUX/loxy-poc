@@ -9,13 +9,13 @@ function start() {
   .then(videosDetailsFromYT)
   .then(videosArray =>feedSection(videosArray,'interviews'))
 
-  .then(()=> retrieveFromYT('oneshots'))
-  .then(videosDetailsFromYT)
-  .then(videosArray =>feedSection(videosArray,'oneshots'))
+//   .then(()=> retrieveFromYT('oneshots'))
+//   .then(videosDetailsFromYT)
+//   .then(videosArray =>feedSection(videosArray,'oneshots'))
 
-  .then(()=> retrieveFromYT('indeh'))
-  .then(videosDetailsFromYT)
-  .then(videosArray =>feedSection(videosArray,'indeh'))
+//   .then(()=> retrieveFromYT('indeh'))
+//   .then(videosDetailsFromYT)
+//   .then(videosArray =>feedSection(videosArray,'indeh'))
 
   .catch(throwRequestError)
 };
