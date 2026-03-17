@@ -14,13 +14,15 @@ html{
     scroll-behavior: smooth;
     width: 100%;
     height: 100vh;
-    overflow: hidden;
 }
 
 *,::after,::before{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+::selection{
+    background: var(--pink);
 }
 
 a{
@@ -43,12 +45,16 @@ body{
     animation: body 32s ease-in-out infinite;
     width: 100%;
     height: 100vh;
-    overflow-y: auto;
+    position: relative;
+}
+.body-growning-container{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.nav-backdrop.display{
-    width: 100%;
-}
 .nav-backdrop{
     position: fixed;
     right: 0;
@@ -57,9 +63,37 @@ body{
     width: 0%;
     background: #111111EE;
     z-index: 90;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
 }
+
 nav{
-    width: 240px;
+    display: none;
+    flex-direction: column;
+}
+
+.nav-link a,
+.info-link a{
+    color: white;
+    font-size: 40px;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: 4%;
+}
+.nav-link a{
+    text-transform: uppercase;
+}
+.nav-link.info-link a{
+    color: var(--yellow);
+    text-transform: unset;
+}
+.get-to-know-us{
+    padding-top: 50px;
+}
+
+/* nav{
+    width: fit-content;
     position: absolute;
     top: 0;
     right: 0;
@@ -67,14 +101,18 @@ nav{
     translate: 100% 0;
     background: white;
     z-index: 50;
-}
+} */
+
 nav.slideIn{
-    translate: 0 0 ;
-    transition: translate .8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
 }
 
 body.locked{
     overflow: hidden;
+}
+.nav-backdrop.display{
+    width: 100%;
+    padding: 0 100px;
 }
 
 
@@ -94,6 +132,7 @@ body.locked{
 }
 .socials svg{
     width: 20px;
+    fill: white;
 }
 
 .nav-buttons{
@@ -110,10 +149,6 @@ body.locked{
     border-radius: 30px;
 }
 
-.socials svg{
-    fill: white;
-}
-
 .menu-line{
     width: 24px;
     height: 4px;
@@ -121,7 +156,8 @@ body.locked{
     border-radius: 30px;
     transition: translate .25s cubic-bezier(0.19, 1, 0.22, 1),
                 rotate .5s cubic-bezier(0.19, 1, 0.22, 1),
-                scale .5s cubic-bezier(0.19, 1, 0.22, 1);
+                scale .5s cubic-bezier(0.19, 1, 0.22, 1),
+                opacity .5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 #menu-toggle{
@@ -154,6 +190,7 @@ body.locked{
 } */
 .toggle .mid-line{
     translate: 300%;
+    opacity: 0;
 }
 
 #search{
@@ -172,6 +209,18 @@ body.locked{
 
 
 /* MAIN */
+main {
+    position: relative;
+    z-index: 2;
+}
+
+h4 {
+    font-weight: 400;
+    font-size: clamp(2em,3.8vw,2.8em);
+    letter-spacing: 4%;
+    padding: 10px 12px;
+    margin-bottom: 30px;
+}
 
 .full-screen-container{
     width: 100%;
@@ -181,7 +230,6 @@ body.locked{
 .pan{
     width: 100%;
     height: 100%;
-    background: green;
     overflow: hidden;
     position: relative;
 }
@@ -315,7 +363,7 @@ h2{
     text-align: center;
     border-radius: 30px;
     /* backdrop-filter: blur(10px); */
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 4%;
     text-transform: uppercase;
     border: 3px solid;
@@ -391,7 +439,7 @@ video{
 }
 .main-title{
     text-align: center;
-    font-size: 24px;
+    font-size: 2bw;
     font-weight: 400;
     letter-spacing: 80%;
     text-transform: uppercase;
@@ -407,14 +455,6 @@ video{
     left: 50%;
     translate: -50% 150%;
 }
-
-/* .bottom.reveal,
-.top.reveal{
-    translate: -50% -50%;
-    opacity: 1 ;
-    transition: translate .6s cubic-bezier(0.075, 0.82, 0.165, 1),
-                opacity .6s linear;
-} */
 
 .main{
     padding: 20px;
@@ -497,7 +537,7 @@ video{
 
 
 @keyframes oneShotBlockAnim{
-    25%,80%{ width: 50%; }
+    25%,80%{ width: 50vw; }
     100%{ width: 0%; }
 }
 
@@ -525,7 +565,7 @@ video{
 
 
 @keyframes podcastBlockAnim{
-    25%,80%{ width: 50%; }
+    25%,80%{ width: 50vw; }
     100%{ width: 0%; }
 }
 
@@ -617,6 +657,7 @@ iframe{
     width: 100%;
     aspect-ratio: 9 / 16;
     position: relative;
+    min-height: 50vh
 }
 
 #interviews .feed-element,
@@ -633,7 +674,7 @@ iframe{
     height: 100%;
 }
 .podcast-element{
-    width: 500px;
+    width: min(500px,98%);
     height: 100px;
     position: relative;
     margin: 0 auto 30px;
@@ -682,6 +723,47 @@ section{
     padding-top: 60px ;
 }
 
+footer{
+    padding: 100px 50px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: visible;
+    position: relative;
+    scrollbar-width: none;
+}
+
+.footer-link {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1.5;
+    font-size: 40px;
+}
+
+.tribute {
+    color: white;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 4%;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    translate: -50% 0;
+}
+
+.footer-decoration {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    width: 100%;
+    opacity: .08;
+    z-index: -1;
+}
+
 @keyframes loading{
     15%{
         background: #ffffff30;
@@ -689,4 +771,122 @@ section{
     30%,100%{
         background: #ffffff00;
     }
+}
+
+
+@media screen and (max-width: 800px) {
+    .landscape-grid {
+        grid-template-rows: repeat(6,auto);
+        grid-template-columns: 1fr;
+    }
+    .feed-grid{
+        grid-template-columns: repeat(2,1fr);
+        grid-template-rows: repeat(4,auto);
+    }
+    .main-title{
+        font-size: 2.3vw;
+    }
+    .link-to{
+        font-size: 20px;
+    }
+    .anim#logo{
+        scale: 2.4;
+    }
+    .pageLink{
+        font-size: 16px;
+    }
+    .socials{
+        top: unset;
+        left: 50%;
+        bottom: 40px;
+        flex-direction: unset;
+        translate: -50% 0;
+        align-items: center;
+        padding: 12px 20px;
+    }
+    @keyframes oneShotBlockAnim{
+        25%,80%{ width: 100vw; }
+        100%{ width: 0%; }
+    }
+    @keyframes podcastBlockAnim{
+        25%,80%{ width: 100vw; }
+        100%{ width: 0%; }
+    }
+    .socials svg{
+        width: 40px;
+    }
+    .nav-buttons{
+        right: 24px;
+    }
+    .nav-buttons,
+    .socials{
+        border: 2px solid;
+    }
+    .tribute{
+        padding: 50px 0 80px;
+        position: unset;
+        translate: unset;
+    }
+    .nav-backdrop.display{
+        padding: 60px;
+    }
+}
+@media screen and (max-width: 700px) {
+    .feed-section .feed-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+    .interview-container,
+    .onstage-container{
+        top: 0;
+        left: 50%;
+        translate: -50% 0;
+        transform-origin: top;
+        scale: 1;
+        height: 0;
+    }
+    .interview-container video,
+    .onstage-container video{
+        height: 50vh;
+    }
+    @keyframes interviewBlockAnim{
+        25%,80%{  height: 50%; }
+        100%{ height: 0; }
+    }
+    @keyframes onstageBlockAnim{
+        25%,80%{  height: 50%; }
+        100%{ height: 0; }
+    }
+    .nav-buttons{
+        right: 10px;
+    }
+    .nav-backdrop.display{
+        padding: 40px;
+    }
+}
+@media screen and (max-width: 600px) {
+    .feed-section .feed-grid {
+        grid-template-columns: min(98%,400px);
+        justify-content: center;
+    }
+    .link-to{
+        font-size: 18px;
+    }
+    .anim#logo{
+        scale: 2;
+    }
+    .pageLink{
+        font-size: 14px;
+    }
+    footer{
+        padding-left: 12px;
+    }
+    .feed-section h2{
+        padding-left: 10px;
+    }
+}
+
+.about-text{
+    font-size: 3vw;
+    padding: 50px;
+    line-height: 1.5;
 }
