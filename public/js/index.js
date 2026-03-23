@@ -10,6 +10,7 @@ function startSequence() {
 function playStep(title, ctn, link, next) {
     // 1. Reset all first to ensure a clean slate
     resetAnimElements();
+    ctn.querySelector('.lazyLoad') && loadSource(ctn)
 
     // 2. Trigger animations
     title.classList.add('anim');
@@ -51,6 +52,15 @@ function animLast() {
 
 function resetAnimElements() {
     document.querySelectorAll('.anim').forEach(ele => ele.classList.remove('anim'));
+}
+
+function loadSource(videoBlockContainer){
+
+    videoBlockContainer.querySelectorAll('source').forEach( tag=>{
+        tag.setAttribute('src', tag.getAttribute('data-src') ) 
+    })
+    videoBlockContainer.querySelector('video').load()
+    videoBlockContainer.querySelector('video').classList.remove('lazyLoad')
 }
 
 window.addEventListener("load", () =>{
