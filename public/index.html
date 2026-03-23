@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Loxymore, média dédié à la culture urbaine caribéenne</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="./assets/favicon/site.webmanifest" />
 </head>
 <body>
     <div class="body-growning-container">
@@ -58,7 +63,7 @@
                     <a href="#interviews">Interviews</a>
                 </p>
                 <p class="nav-link">
-                    <a href="#interviews">One Shots</a>
+                    <a href="#oneshots">One Shots</a>
                 </p>
                 <p class="nav-link">
                     <a href="#indeh">In deh</a>
@@ -67,17 +72,17 @@
                     <a href="#onstage">Events à venir</a>
                 </p>
                 <p class="nav-link">
-                    <a href="#onstage">Podcasts</a>
+                    <a href="#podcast">Podcasts</a>
                 </p>
                 <div class="get-to-know-us">
                     <p class="nav-link info-link">
-                        <a href="/">Accueil</a>
+                        <a href=".">Accueil</a>
                     </p>
                     <p class="nav-link info-link">
-                        <a href="/about.html">À propos</a>
+                        <a href="./about.html">À propos</a>
                     </p>
                     <p class="nav-link info-link">
-                        <a href="/about.html#contact">Contact</a>
+                        <a href="./about.html#contact">Contact</a>
                     </p>
                 </div>
             </nav>
@@ -85,23 +90,46 @@
         <div class="full-screen-container">
             <div class="pan">
                 <div class="video-container interview-container">
-                    <video muted autoplay loop>
-                        <source src="./assets/videos/video2.mp4">
+                    <video muted autoplay loop playsinline preload="metadata" poster="./assets/images/v2-poster.jpg">
+                        <source src="./assets/videos/video2-desktop.webm" type="video/webm" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video2-desktop.mp4" type="video/mp4" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video2-tablet.webm" type="video/webm" media="(min-width: 768px)">
+                        <source src="./assets/videos/video2-tablet.mp4" type="video/mp4" media="(min-width: 768px)">
+                        <source src="./assets/videos/video2-mobile.webm" type="video/webm">
+                        <source src="./assets/videos/video2-mobile.mp4" type="video/mp4">
                     </video>
                 </div>
+
                 <div class="video-container oneShots-container">
-                    <video muted autoplay loop>
-                        <source src="./assets/videos/video3.mp4">
+                    <video muted autoplay loop playsinline preload="metadata" poster="./assets/images/v3-poster.jpg">
+                        <source src="./assets/videos/video3-desktop.webm" type="video/webm" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video3-desktop.mp4" type="video/mp4" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video3-tablet.webm" type="video/webm" media="(min-width: 768px)">
+                        <source src="./assets/videos/video3-tablet.mp4" type="video/mp4" media="(min-width: 768px)">
+                        <source src="./assets/videos/video3-mobile.webm" type="video/webm">
+                        <source src="./assets/videos/video3-mobile.mp4" type="video/mp4">
                     </video>
                 </div>
+
                 <div class="video-container podcast-container">
-                    <video muted autoplay loop>
-                        <source src="./assets/videos/video4.mp4">
+                    <video muted autoplay loop playsinline preload="metadata" poster="./assets/images/v4-poster.jpg">
+                        <source src="./assets/videos/video4-desktop.webm" type="video/webm" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video4-desktop.mp4" type="video/mp4" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video4-tablet.webm" type="video/webm" media="(min-width: 768px)">
+                        <source src="./assets/videos/video4-tablet.mp4" type="video/mp4" media="(min-width: 768px)">
+                        <source src="./assets/videos/video4-mobile.webm" type="video/webm">
+                        <source src="./assets/videos/video4-mobile.mp4" type="video/mp4">
                     </video>
                 </div>
+
                 <div class="video-container onstage-container">
-                    <video muted autoplay loop>
-                        <source src="./assets/videos/video5.mp4">
+                    <video muted autoplay loop playsinline preload="metadata" poster="./assets/images/v5-poster.jpg">
+                        <source src="./assets/videos/video5-desktop.webm" type="video/webm" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video5-desktop.mp4" type="video/mp4" media="(min-width: 1024px)">
+                        <source src="./assets/videos/video5-tablet.webm" type="video/webm" media="(min-width: 768px)">
+                        <source src="./assets/videos/video5-tablet.mp4" type="video/mp4" media="(min-width: 768px)">
+                        <source src="./assets/videos/video5-mobile.webm" type="video/webm">
+                        <source src="./assets/videos/video5-mobile.mp4" type="video/mp4">
                     </video>
                 </div>
                 <div class="hero-content">
@@ -169,9 +197,6 @@
                 <div class="feed-element"></div>
                 <div class="feed-element"></div>
                 <div class="feed-element"></div>
-                <div class="feed-element"></div>
-                <div class="feed-element"></div>
-                <div class="feed-element"></div>
             </div>
             <a class="pageLink">Plus de In deh</a>
         </section>
@@ -211,16 +236,16 @@
 
         <footer>
             <img src="./assets/svg/logo.svg" alt="" class="footer-decoration">
-            <a href="/index.html#interviews" class="footer-link">Interviews</a>
-            <a href="/index.html#oneshots" class="footer-link">One Shots</a>
-            <a href="/index.html#indeh" class="footer-link">In Deh</a>
-            <a href="/index.html#onstage" class="footer-link">À venir</a>
-            <a href="/index.html#podcasts" class="footer-link">Podcasts</a>
+            <a href="#interviews" class="footer-link">Interviews</a>
+            <a href="#oneshots" class="footer-link">One Shots</a>
+            <a href="#indeh" class="footer-link">In Deh</a>
+            <a href="#onstage" class="footer-link">À venir</a>
+            <a href="#podcasts" class="footer-link">Podcasts</a>
             <p class="tribute">Par <a href="">Emmanuel FOUCAN</a> et <a href="">Chloé GARGAR</a> </p>
         </footer>
     </main>
-   <script src="/js/index.js" type="module"></script>
+   <script src="./js/index.js" type="module"></script>
    <script src="https://apis.google.com/js/api.js"></script>
-   <script src="/js/youtube.js" type="module"></script>
+   <script src="./js/youtube.js" type="module"></script>
 </body>
 </html>

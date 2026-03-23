@@ -53,7 +53,10 @@ function resetAnimElements() {
     document.querySelectorAll('.anim').forEach(ele => ele.classList.remove('anim'));
 }
 
-window.addEventListener("load", () => setTimeout(startSequence, 1000));
+window.addEventListener("load", () =>{
+    el.interviewCTN && setTimeout(startSequence, 350)
+} 
+);
 
 
 el.menuToggle.addEventListener('click',toggleMenu)
@@ -66,6 +69,7 @@ function toggleMenu(e){
         || e.target.classList.contains('toggle')
         || e.target.classList.contains('menu-line')
         || e.target.id==='menu-toggle'
+        || e.target.closest('.nav-link')
      ){
          el.menuBackdrop.classList.toggle('display')
          el.menuToggle.classList.toggle('toggle')

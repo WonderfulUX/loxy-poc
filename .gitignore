@@ -3,3 +3,5 @@ hidden/
 node_modules/
 project_dump.txt
 .env
+old/
+videos/

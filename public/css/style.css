@@ -273,6 +273,7 @@ h4 {
     position: absolute;
     z-index: 5;
     overflow: hidden;
+    pointer-events: none;
 }
 
 
@@ -639,7 +640,7 @@ video{
     gap: 12px;
 }
 .feed-grid{
-    grid-template-rows: repeat(3,auto);
+    grid-template-rows: repeat(2,auto);
     grid-template-columns: repeat(3,1fr);
 }
 .landscape-grid{
@@ -882,6 +883,15 @@ footer{
     }
     .feed-section h2{
         padding-left: 10px;
+    }
+}
+@media screen and (max-width: 450px) {
+    .anim#logo{
+        scale: 1.5;
+    }
+    .nav-link a,
+    .info-link a{
+        font-size: 30px;
     }
 }
 
