@@ -2,25 +2,22 @@ function start() {
   // 2
   gapi.client.init({
     'apiKey': 'AIzaSyC6HtijIuAiZASDykJycn7aMZLOo1se-OY',
-    // clientId and scope are optional if auth is not required.
-    // 'clientId': 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com',
-    // 'scope': 'profile',
   }).then(()=> retrieveFromYT('interviews'))
   .then(videosDetailsFromYT)
   .then(videosArray =>feedSection(videosArray,'interviews'))
 
-//   .then(()=> retrieveFromYT('oneshots'))
-//   .then(videosDetailsFromYT)
-//   .then(videosArray =>feedSection(videosArray,'oneshots'))
+  .then(()=> retrieveFromYT('oneshots'))
+  .then(videosDetailsFromYT)
+  .then(videosArray =>feedSection(videosArray,'oneshots'))
 
-//   .then(()=> retrieveFromYT('indeh'))
-//   .then(videosDetailsFromYT)
-//   .then(videosArray =>feedSection(videosArray,'indeh'))
+  .then(()=> retrieveFromYT('indeh'))
+  .then(videosDetailsFromYT)
+  .then(videosArray =>feedSection(videosArray,'indeh'))
 
   .catch(throwRequestError)
 };
 // 1
-gapi.load('client', start);
+// gapi.load('client', start);
 
 
 const YTqueryParams = { 
@@ -34,7 +31,7 @@ const YTqueryParams = {
     },
     indeh : {
         playlistId: "PL70fD2645rWnPn1k_6CVvXMZI0a4G8BvB",
-        maxResults: 9,
+        maxResults: 6,
     },
 }
 
@@ -47,6 +44,7 @@ function retrieveFromYT(sectionName){
 }
 
 async function videosDetailsFromYT(response){
+    console.log(response.result);
     const items = response.result.items     // console.log(items);
     const idList =  retrieveVideoIds(items)
     return gapi.client.request({
@@ -62,8 +60,7 @@ function feedSection(videosArray,sectionName){
 
 
 function displayImages(videosArray,sectionName){
-    const videos = videosArray.result.items 
-    console.log(videos);
+    const videos = videosArray.result.items  //console.log(videos);
     for(let i=0; i<videos.length ; i++){
         const feedImg = document.createElement('img')
         feedImg.src = videos[i].snippet.thumbnails.standard.url
@@ -72,8 +69,7 @@ function displayImages(videosArray,sectionName){
     }
 }
 function displayVideos(videosArray,sectionName){
-    const videos = videosArray.result.items 
-    console.log(videos);
+    const videos = videosArray.result.items  //console.log(videos);
     for(let i=0; i<videos.length ; i++){
         document.querySelectorAll(`#${sectionName} .feed-element`)[i].innerHTML 
         = videos[i].player.embedHtml.replace('//','https://')
