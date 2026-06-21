@@ -20,8 +20,10 @@ const logo = document.querySelector('#logo')
 const menuBackdrop = document.querySelector('.nav-backdrop')
 const menuToggle = document.getElementById('menu-toggle')
 
+const anchor = document.getElementById('about-anchor')
 
-export{
+
+export {
     interviewCTN,
     interviewTITLE,
     interviewLINK,
@@ -37,5 +39,6 @@ export{
     cultureTITLE,
     logo,
     menuBackdrop,
-    menuToggle
+    menuToggle,
+    anchor
 }

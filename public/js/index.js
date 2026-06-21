@@ -14,9 +14,9 @@ function playStep(title, ctn, link, next) {
 
     // 2. Trigger animations
     title.classList.add('anim');
-    
+
     // Use the same delays defined in your CSS variables
-    setTimeout(() => ctn.classList.add('anim'), 800); 
+    setTimeout(() => ctn.classList.add('anim'), 800);
     setTimeout(() => link.classList.add('anim'), 300);
 
     // 3. One-time listener for the end of THIS specific step
@@ -54,36 +54,60 @@ function resetAnimElements() {
     document.querySelectorAll('.anim').forEach(ele => ele.classList.remove('anim'));
 }
 
-function loadSource(videoBlockContainer){
+function loadSource(videoBlockContainer) {
 
-    videoBlockContainer.querySelectorAll('source').forEach( tag=>{
-        tag.setAttribute('src', tag.getAttribute('data-src') ) 
+    videoBlockContainer.querySelectorAll('source').forEach(tag => {
+        tag.setAttribute('src', tag.getAttribute('data-src'))
     })
     videoBlockContainer.querySelector('video').load()
     videoBlockContainer.querySelector('video').classList.remove('lazyLoad')
 }
 
-window.addEventListener("load", () =>{
+window.addEventListener("load", () => {
     el.interviewCTN && setTimeout(startSequence, 350)
-} 
+    el.anchor && navObserver.observe(el.anchor)
+}
 );
 
 
-el.menuToggle.addEventListener('click',toggleMenu)
-el.menuBackdrop.addEventListener('click',toggleMenu)
 
 
-function toggleMenu(e){
+el.menuToggle.addEventListener('click', toggleMenu)
+el.menuBackdrop.addEventListener('click', toggleMenu)
 
-    if( e.target.classList.contains('nav-backdrop') 
+
+function toggleMenu(e) {
+
+    if (e.target.classList.contains('nav-backdrop')
         || e.target.classList.contains('toggle')
         || e.target.classList.contains('menu-line')
-        || e.target.id==='menu-toggle'
+        || e.target.id === 'menu-toggle'
         || e.target.closest('.nav-link')
-     ){
-         el.menuBackdrop.classList.toggle('display')
-         el.menuToggle.classList.toggle('toggle')
-         document.body.classList.toggle('locked')
-         document.querySelector('nav').classList.toggle('slideIn')
-     }
+    ) {
+        el.menuBackdrop.classList.toggle('display')
+        el.menuToggle.classList.toggle('toggle')
+        document.body.classList.toggle('locked')
+        document.querySelector('nav').classList.toggle('slideIn')
+    }
 }
+
+
+const navObserver = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            // console.log('anchor HERE');
+            document.querySelector('aside').classList.remove('show')
+        }
+        else {
+            // console.log('anchor OUT');
+            document.querySelector('aside').classList.add('show')
+        }
+    })
+},
+    {
+        threshold: 0,
+        rootMargin: '-0px'
+    }
+
+)
