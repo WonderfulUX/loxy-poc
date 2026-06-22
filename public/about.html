@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loxymore, média dédié à la culture urbaine caribéenne</title>
+    <title>Demo website for Loxymore by Wonderfulux</title>
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" type="image/png" href="./assets/favicon/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="./assets/favicon/favicon.svg" />
@@ -100,61 +100,65 @@
         </nav>
     </div>
     <aside>
-        <p>
-            # Liens rapides
-        </p>
+        <p style="width: 20px; text-align: center;">#</p>
         <div class="quick-link-ctn">
-            <a href="#whatisloxymore" class="about-quick-link">
+            <a href="#whatisloxymore" class="about-quick-link" data-target="whatisloxymore">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>1.</strong> Qu'est-ce que LOXYMORE ?</span>
+                <span class="link-label">1. Qu'est-ce que LOXYMORE ?</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-interviews" class="about-quick-link">
+            <a href="#about-interviews" class="about-quick-link" data-target="about-interviews">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>2.</strong> Interviews</span>
+                <span class="link-label">2. Interviews</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-indeh" class="about-quick-link">
+            <a href="#about-indeh" class="about-quick-link" data-target="about-indeh">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>3.</strong> In deh</span>
+                <span class="link-label">3. In deh</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-oneshot" class="about-quick-link">
+            <a href="#about-oneshot" class="about-quick-link" data-target="about-oneshot">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>4.</strong> One shot</span>
+                <span class="link-label">4. One shot</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-livestories" class="about-quick-link">
+            <a href="#about-livestories" class="about-quick-link" data-target="about-livestories">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>5.</strong> Live stories</span>
+                <span class="link-label">5. Live stories</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-festivaltour" class="about-quick-link">
+            <a href="#about-festivaltour" class="about-quick-link" data-target="about-festivaltour">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>6.</strong> LOXYMORE Festival tour</span>
+                <span class="link-label">6. LOXYMORE Festival tour</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-onstage" class="about-quick-link">
+            <a href="#about-onstage" class="about-quick-link" data-target="about-onstage">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>7.</strong> LOXYMORE on stage</span>
+                <span class="link-label">7. LOXYMORE on stage</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-corsair-loxymore" class="about-quick-link">
+            <a href="#about-corsair-loxymore" class="about-quick-link" data-target="about-corsair-loxymore">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>8.</strong> Corsair + LOXYMORE</span>
+                <span class="link-label">8.Corsair + LOXYMORE</span>
             </a>
         </div>
         <div class="quick-link-ctn">
-            <a href="#about-entertainer" class="about-quick-link">
+            <a href="#about-entertainers" class="about-quick-link" data-target="about-entertainers">
                 <span class="link-position"></span>
-                <span class="link-label"><strong>9.</strong> Les animateurs</span>
+                <span class="link-label">9. Les animateurs</span>
+            </a>
+        </div>
+        <div class="quick-link-ctn">
+            <a href="#contact" class="about-quick-link" data-target="contact">
+                <span class="link-position"></span>
+                <span class="link-label">∟ Contact</span>
             </a>
         </div>
     </aside>
@@ -221,6 +225,12 @@
                         <span class="link-label">Les animateurs</span>
                     </a>
                 </div>
+                <div class="quick-link-ctn">
+                    <a href="#contact" class="about-quick-link">
+                        <span class="link-position">∟</span>
+                        <span class="link-label">Contact</span>
+                    </a>
+                </div>
             </div>
         </section>
         <div id="about-anchor"></div>
@@ -240,7 +250,7 @@
                 ne reflètent pas toujours nos réalités, nous construisons une narration nouvelle,
                 depuis chez nous, pour nous - et pour le monde.
             </p>
-            <img class="image-full" src="./assets/img/about-loxymore.png" alt="">
+            <img loading="eager" class="image-full" src="./assets/img/about-loxymore.png" alt="">
         </section>
         <section id="about-interviews" class="about-section">
             <h2>Interviews</h2>
@@ -252,7 +262,8 @@
                 culturelle. <br><br>
                 Exemples : Matieu White, Maureen, Latop, Julien Dalle, Nuttea, Misié Sadik…
             </p>
-            <img id="about-interviews-image" class="image-full" src="./assets/img/about-interviews.jpg" alt="">
+            <img loading="eager" id="about-interviews-image" class="image-full" src="./assets/img/about-interviews.jpg"
+                alt="">
         </section>
         <section id="about-indeh" class="about-section">
             <h2>Indeh</h2>
@@ -263,9 +274,9 @@
                 réalité des artistes, des équipes et de l'ambiance unique de nos cultures.
             </p>
             <div class="indeh-grid">
-                <img class="indeh-grid-item" src="./assets/img/about-indeh-1.jpg" alt="">
-                <img class="indeh-grid-item" src="./assets/img/about-indeh-2.jpg" alt="">
-                <img class="indeh-grid-item" src="./assets/img/about-indeh-3.jpg" alt="">
+                <img loading="eager" class="indeh-grid-item" src="./assets/img/about-indeh-1.jpg" alt="">
+                <img loading="eager" class="indeh-grid-item" src="./assets/img/about-indeh-2.jpg" alt="">
+                <img loading="eager" class="indeh-grid-item" src="./assets/img/about-indeh-3.jpg" alt="">
             </div>
         </section>
         <section id="about-oneshot" class="about-section">
@@ -280,9 +291,9 @@
                 antillaise.
             </p>
             <div class="oneshot-grid">
-                <img class="oneshot-grid-item" src="./assets/img/about-oneshot-1.jpg" alt="">
-                <img class="oneshot-grid-item" src="./assets/img/about-oneshot-2.jpg" alt="">
-                <img class="oneshot-grid-item" src="./assets/img/about-oneshot-3.jpg" alt="">
+                <img loading="eager" class="oneshot-grid-item" src="./assets/img/about-oneshot-1.jpg" alt="">
+                <img loading="eager" class="oneshot-grid-item" src="./assets/img/about-oneshot-2.jpg" alt="">
+                <img loading="eager" class="oneshot-grid-item" src="./assets/img/about-oneshot-3.jpg" alt="">
             </div>
         </section>
         <section id="about-livestories" class="about-section">
@@ -294,9 +305,9 @@
                 direct et authentique à la vibe des festivals, concerts et tournées.
             </p>
             <div class="livestories-grid">
-                <img class="livestories-grid-item" src="./assets/img/about-livestories-1.jpg" alt="">
-                <img class="livestories-grid-item" src="./assets/img/about-livestories-2.jpg" alt="">
-                <img class="livestories-grid-item" src="./assets/img/about-livestories-3.jpg" alt="">
+                <img loading="eager" class="livestories-grid-item" src="./assets/img/about-livestories-1.jpg" alt="">
+                <img loading="eager" class="livestories-grid-item" src="./assets/img/about-livestories-2.jpg" alt="">
+                <img loading="eager" class="livestories-grid-item" src="./assets/img/about-livestories-3.jpg" alt="">
             </div>
         </section>
         <section id="about-festivaltour" class="about-section">
@@ -319,12 +330,12 @@
                 Grâce à nos stories, les spectateurs vivront le festival d'une autre façon : à la sauce Loxymore.
             </p>
             <div class="festivaltour-grid">
-                <img class="festivaltour-grid-item" src="./assets/img/about-festivaltour-1.png" alt="">
-                <img class="festivaltour-grid-item" src="./assets/img/about-festivaltour-2.png" alt="">
-                <img class="festivaltour-grid-item" src="./assets/img/about-festivaltour-3.png" alt="">
-                <img class="festivaltour-grid-item" src="./assets/img/about-festivaltour-4.png" alt="">
-                <img class="festivaltour-grid-item" src="./assets/img/about-festivaltour-5.png" alt="">
-                <img class="festivaltour-grid-item" src="./assets/img/about-festivaltour-6.jpg" alt="">
+                <img loading="eager" class="festivaltour-grid-item" src="./assets/img/about-festivaltour-1.png" alt="">
+                <img loading="eager" class="festivaltour-grid-item" src="./assets/img/about-festivaltour-2.png" alt="">
+                <img loading="eager" class="festivaltour-grid-item" src="./assets/img/about-festivaltour-3.png" alt="">
+                <img loading="eager" class="festivaltour-grid-item" src="./assets/img/about-festivaltour-4.png" alt="">
+                <img loading="eager" class="festivaltour-grid-item" src="./assets/img/about-festivaltour-5.png" alt="">
+                <img loading="eager" class="festivaltour-grid-item" src="./assets/img/about-festivaltour-6.jpg" alt="">
             </div>
         </section>
         <section id="about-onstage" class="about-section">
@@ -347,9 +358,9 @@
                 Grâce à nos stories, les spectateurs vivront le festival d'une autre façon : à la sauce Loxymore.
             </p>
             <div class="onstage-grid">
-                <img class="onstage-grid-item" src="./assets/img/about-onstage-1.jpg" alt="">
-                <img class="onstage-grid-item" src="./assets/img/about-onstage-2.jpg" alt="">
-                <img class="onstage-grid-item" src="./assets/img/about-onstage-3.jpg" alt="">
+                <img loading="eager" class="onstage-grid-item" src="./assets/img/about-onstage-1.jpg" alt="">
+                <img loading="eager" class="onstage-grid-item" src="./assets/img/about-onstage-2.jpg" alt="">
+                <img loading="eager" class="onstage-grid-item" src="./assets/img/about-onstage-3.jpg" alt="">
             </div>
         </section>
         <section id="about-corsair-loxymore" class="about-section">
@@ -371,25 +382,73 @@
                 Prestations, ambiance, animations, microtrottoirs…
                 Grâce à nos stories, les spectateurs vivront le festival d'une autre façon : à la sauce Loxymore.
             </p>
-            <img class="img-corsair-loxymore" src="./assets/img/about-corsair-loxymore.jpg"></img>
+            <img loading="eager" class="img-corsair-loxymore" src="./assets/img/about-corsair-loxymore.jpg"></img>
+        </section>
+        <section id="about-entertainers" class="about-section">
+            <h2>Les animateurs</h2>
+            <div class="entertainer">
+                <img loading="eager" class="entertainer-img" src="./assets/img/shorty.jpg" alt="">
+                <div class="entertainer-content">
+                    <h3>Shorty</h3>
+                    <p>Basquiat, Fuckly, Banksy, Medine, Booba, David Delaplace, Dany Laferriere,
+                        Paul Beatty, Kalash, Chester Himes... <br>
+                        Ces artistes qui animent ma passion de la culture urbaine me poussent à
+                        être un acteur de son développement. Du Slam aux compilations musicales
+                        en passant par des blogs sur le sujet, un seul objectif : mener des projets
+                        exaltants et leur donner vie !
+                    </p>
+                </div>
+            </div>
+            <div class="entertainer">
+                <img loading="eager" class="entertainer-img" src="./assets/img/khloe.jpg" alt="">
+                <div class="entertainer-content">
+                    <h3> Khloé</h3>
+                    <p>Co-fondatrice de l'Agence 88 et de Loxymore.com mais aussi Sneakers addict
+                        et passionnée de lifestyle. <br>
+                        Je présente avec plaisir le format « vlog » de Loxymore : Indeh. <br>
+                        Indeh est une émission itinérante avec des images prises sur le vif, qui amène
+                        le public au coeur des événements urbains caribéens en tous genres !
+                    </p>
+                </div>
+            </div>
         </section>
         <section id="contact" class="about-section">
-            <p class="about-text">
-                Contact us
-            </p>
+            <h2>Contact</h2>
+            <p>Emmanuel Foucan <strong>(SHORTY)</strong></p>
+            <p><a class="contact-link" href="tel:+33680737917">0680737917</a></p>
+            <p><a class="contact-link" href="mailto:contact@loxymore.com">contact@loxymore.com</a></p>
+
+        </section>
+        <section id="partners" class="about-section">
+            <h2>Ils nous font confiance</h2>
+            <div class="parters-grid">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-1.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-2.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-3.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-4.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-5.jpg" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-6.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-7.jpg" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-8.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-9.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-10.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-11.png" alt="">
+                <img loading="eager" class="partners-image" src="./assets/img/partners-12.png" alt="">
+            </div>
         </section>
 
-        <footer>
-            <img src="./assets/svg/logo.svg" alt="" class="footer-decoration">
-            <a href="./index.html#interviews" class="footer-link">Interviews</a>
-            <a href="./index.html#oneshots" class="footer-link">One Shots</a>
-            <a href="./index.html#indeh" class="footer-link">In Deh</a>
-            <a href="./index.html#onstage" class="footer-link">À venir</a>
-            <a href="./index.html#podcasts" class="footer-link">Podcasts</a>
-            <p class="tribute">Par <a href="">Emmanuel FOUCAN</a> et <a href="">Chloé GARGAR</a> </p>
-        </footer>
     </main>
+    <footer>
+        <img loading="eager" src="./assets/svg/logo.svg" alt="" class="footer-decoration">
+        <a href="./index.html#interviews" class="footer-link">Interviews</a>
+        <a href="./index.html#oneshots" class="footer-link">One Shots</a>
+        <a href="./index.html#indeh" class="footer-link">In Deh</a>
+        <a href="./index.html#onstage" class="footer-link">À venir</a>
+        <a href="./index.html#podcasts" class="footer-link">Podcasts</a>
+        <p class="tribute">Par <a href="">Emmanuel FOUCAN</a> et <a href="">Chloé GARGAR</a> </p>
+    </footer>
     <script src="./js/index.js" type="module"></script>
+    <script src="./js/spotify.js"></script>
     <!-- <script src="https://apis.google.com/js/api.js"></script>
    <script src="./js/youtube.js" type="module"></script> -->
 </body>

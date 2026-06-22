@@ -21,6 +21,17 @@ const menuBackdrop = document.querySelector('.nav-backdrop')
 const menuToggle = document.getElementById('menu-toggle')
 
 const anchor = document.getElementById('about-anchor')
+const aboutLoxymore = document.querySelector('#whatisloxymore')
+const aboutInterviews = document.querySelector('#about-interviews')
+const aboutIndeh = document.querySelector('#about-indeh')
+const aboutOneshot = document.querySelector('#about-oneshot')
+const aboutLivestories = document.querySelector('#about-livestories')
+const aboutFestivaltour = document.querySelector('#about-festivaltour')
+const aboutOnstage = document.querySelector('#about-onstage')
+const aboutCorsair = document.querySelector('#about-corsair-loxymore')
+const aboutEntertainers = document.querySelector('#about-entertainers')
+const contactShorty = document.querySelector('.about #contact')
+
 
 
 export {
@@ -40,5 +51,15 @@ export {
     logo,
     menuBackdrop,
     menuToggle,
-    anchor
+    anchor,
+    aboutLoxymore,
+    aboutInterviews,
+    aboutIndeh,
+    aboutOneshot,
+    aboutLivestories,
+    aboutFestivaltour,
+    aboutOnstage,
+    aboutCorsair,
+    aboutEntertainers,
+    contactShorty
 }
