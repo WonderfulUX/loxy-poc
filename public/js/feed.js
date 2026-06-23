@@ -16,6 +16,22 @@ export function buildPlaylistItem(data) {
 
 
 // YOUTUBE
+
+var isYTAPILoaded = false;
+
+// Load the YouTube IFrame API
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// This is called automatically by the YouTube Script when finished loading
+window.onYouTubeIframeAPIReady = function () {
+    isYTAPILoaded = true;
+};
+
+
+
 export function feedSection(sectionName, sectionData) {
     console.log(sectionName);
     document.querySelector(`#${sectionName} .loading`).classList.remove('loading')
@@ -23,20 +39,76 @@ export function feedSection(sectionName, sectionData) {
     displayImages(sectionData.items, sectionName)
 }
 
-
 function displayImages(videosArray, sectionName) {
-    const videos = videosArray  //console.log(videos);
-    for (let i = 0; i < videos.length; i++) {
+    //console.log(videos);
+    for (let i = 0; i < videosArray.length; i++) {
         const feedImg = document.createElement('img')
-        feedImg.src = videos[i].snippet.thumbnails.standard.url
+        feedImg.src = videosArray[i].snippet.thumbnails.standard.url
+        feedImg.id = videosArray[i].id
         feedImg.classList.add('cover')
-        document.querySelectorAll(`#${sectionName} .feed-element`)[i].appendChild(feedImg)
+        // document.querySelectorAll(`#${sectionName} .feed-element`)[i].appendChild(feedImg)
     }
 }
+
 function displayVideos(videosArray, sectionName) {
-    const videos = videosArray  //console.log(videos);
-    for (let i = 0; i < videos.length; i++) {
-        document.querySelectorAll(`#${sectionName} .feed-element`)[i].innerHTML
-            = videos[i].player.embedHtml.replace('//', 'https://')
+    const elements = document.querySelectorAll(`#${sectionName} .iframe-container`);
+
+    videosArray.forEach((video, i) => {
+        if (!elements[i]) return;
+
+        // Assign a unique ID to the div
+        const targetId = `player-${video.id}`;
+        elements[i].id = targetId;
+
+        // Use a helper function to avoid loop-scope issues
+        initializePlayerWhenReady(targetId, video.id);
+    });
+}
+
+// This helper ensures each video gets its own polling interval and closure
+function initializePlayerWhenReady(divId, videoId) {
+    if (isYTAPILoaded) {
+        createYTPlayer(divId, videoId);
+    } else {
+        console.log(`Waiting for API to load for video: ${videoId}`);
+        const checkReady = setInterval(() => {
+            if (isYTAPILoaded) {
+                createYTPlayer(divId, videoId);
+                clearInterval(checkReady);
+            }
+        }, 100);
     }
+}
+
+function createYTPlayer(divId, videoId) {
+    // Ensure the element actually exists in the DOM with this ID
+    const el = document.getElementById(divId);
+
+    if (!el) {
+        console.error("Could not find element with ID:", divId);
+        return;
+    }
+
+    // A 50ms delay gives the browser a "breather" to register the ID change
+    setTimeout(() => {
+        try {
+            new YT.Player(divId, {
+                height: '360',
+                width: '640',
+                videoId: videoId,
+                playerVars: {
+                    'playsinline': 1,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'rel': 0,
+                    'modestbranding': 1
+                },
+                events: {
+                    'onReady': () => console.log('New player ready', divId)
+                }
+            });
+        } catch (e) {
+            console.error("YT Player Error:", e);
+        }
+    }, 50);
 }
