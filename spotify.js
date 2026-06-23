@@ -22,7 +22,8 @@ export async function getProfile(accessToken, userSpotifyId) {
     console.log(`https://api.spotify.com/v1/users/${userSpotifyId}/playlists`);
 
     // const response = await fetch(`https://api.spotify.com/v1/users/${userSpotifyId}/playlists`, {
-    const response = await fetch(`https://api.spotify.com/v1/search?q=Loxymore&type=playlist`, {
+    // const response = await fetch(`https://api.spotify.com/v1/search?q=Loxymore&type=podcastAndEpisodes&limit=10`, {
+    const response = await fetch(`https://api.spotify.com/v1/shows/${userSpotifyId}`, {
         headers: {
             Authorization: 'Bearer ' + accessToken
         }
@@ -31,8 +32,6 @@ export async function getProfile(accessToken, userSpotifyId) {
     console.log('Status:', response.status);
 
     const data = await response.json();
-
-    console.log(JSON.stringify(data, null, 2));
     console.log('*******');
 
     return data;

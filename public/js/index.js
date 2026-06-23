@@ -1,5 +1,6 @@
 import { initNavigationObserver, navObserver, startSequence } from './animate.js';
 import * as el from './elements.js';
+import { buildPlaylistItem } from './feed.js';
 
 window.addEventListener("load", () => {
     el.interviewCTN && setTimeout(startSequence, 350)
@@ -38,7 +39,9 @@ async function getYoutubeData() {
 }
 async function getSpotifyData() {
     const STFresponse = await fetch('/api/spotifydata')
-    const STFdata = await STFresponse.json()
-    console.log(STFdata);
-
+    const data = await STFresponse.json()
+    const shortList = data.episodes.items.slice(0, 5)
+    // console.log(shortList);
+    shortList.forEach(playlistItem => buildPlaylistItem(playlistItem));
+    document.querySelector('.podcast-grid.loading').classList.remove('loading')
 }

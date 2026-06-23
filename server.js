@@ -11,6 +11,7 @@ const SPOTIFY_CID = process.env.SPOTIFY_CID
 const SPOTIFY_CSECRET = process.env.SPOTIFY_CSECRET
 const API_KEY = process.env.API_KEY
 const LOXYMORE_SPOTIFY_ID = process.env.LOXYMORE_SPOTIFY_ID
+const LOXYMORE_PDC_SPOTIFY_ID = process.env.LOXYMORE_PDC_SPOTIFY_ID
 
 // console.log(process.env);
 let token = null
@@ -39,8 +40,10 @@ app.get('/api/spotifydata', async (_, res) => {
     }
     console.log('Token : ', token);
     console.log('Expires in : ', expiringDate);
-    const data = await getProfile(token, 'spotify')
-    res.send({ data, message: 'OK' })
+    const data = await getProfile(token, LOXYMORE_PDC_SPOTIFY_ID)
+    // console.log(data);
+
+    res.send(data)
 })
 
 app.listen(PORT, () => {
