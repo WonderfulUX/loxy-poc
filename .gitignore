@@ -3,5 +3,8 @@ hidden/
 node_modules/
 project_dump.txt
 .env
-old/
+*old/
+*base/
 videos/
+*.py
+*analyze.js

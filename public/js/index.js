@@ -1,6 +1,6 @@
 import { initNavigationObserver, navObserver, startSequence } from './animate.js';
 import * as el from './elements.js';
-import { buildPlaylistItem } from './feed.js';
+import { buildPlaylistItem, feedSection } from './feed.js';
 
 window.addEventListener("load", () => {
     el.interviewCTN && setTimeout(startSequence, 350)
@@ -32,13 +32,17 @@ function toggleMenu(e) {
 }
 
 async function getYoutubeData() {
-    const YTresponse = await fetch('/api/youtubedata')
+    const YTresponse = await fetch('/api/get-youtube-playlists-data')
     const YTdata = await YTresponse.json()
     console.log(YTdata);
 
+    for (const category in YTdata) {
+        feedSection(category, YTdata[category])
+    }
+
 }
 async function getSpotifyData() {
-    const STFresponse = await fetch('/api/spotifydata')
+    const STFresponse = await fetch('/api/get-spotify-podcasts')
     const data = await STFresponse.json()
     const shortList = data.episodes.items.slice(0, 5)
     // console.log(shortList);

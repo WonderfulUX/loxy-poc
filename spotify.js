@@ -18,21 +18,21 @@ export async function getToken(clientId, clientSecret) {
 }
 
 
-export async function getProfile(accessToken, userSpotifyId) {
-    console.log(`https://api.spotify.com/v1/users/${userSpotifyId}/playlists`);
+export async function getProfile(accessToken, spotifyUserId) {
+    console.log(`https://api.spotify.com/v1/users/${spotifyUserId}/playlists`);
 
-    // const response = await fetch(`https://api.spotify.com/v1/users/${userSpotifyId}/playlists`, {
+    // const response = await fetch(`https://api.spotify.com/v1/users/${spotifyUserId}/playlists`, {
     // const response = await fetch(`https://api.spotify.com/v1/search?q=Loxymore&type=podcastAndEpisodes&limit=10`, {
-    const response = await fetch(`https://api.spotify.com/v1/shows/${userSpotifyId}`, {
+    const response = await fetch(`https://api.spotify.com/v1/shows/${spotifyUserId}`, {
         headers: {
             Authorization: 'Bearer ' + accessToken
         }
     });
-    console.log('*******');
-    console.log('Status:', response.status);
+    // console.log('*******');
+    // console.log('Status:', response.status);
+    // console.log('*******');
 
     const data = await response.json();
-    console.log('*******');
 
     return data;
 }

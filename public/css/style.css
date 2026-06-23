@@ -397,7 +397,6 @@ h2 {
     line-height: 50px;
     text-align: center;
     border-radius: 30px;
-    /* backdrop-filter: blur(10px); */
     font-weight: 700;
     letter-spacing: 4%;
     text-transform: uppercase;
@@ -825,7 +824,7 @@ iframe {
     padding: 24px;
     background: #121212;
     margin: 30px auto 0;
-    border-radius: 30px;
+    border-radius: 16px;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -858,7 +857,7 @@ iframe {
     width: 150px;
     height: 150px;
     object-fit: cover;
-    border: 1px solid;
+    border: 3px solid;
     border-radius: 8px;
 }
 
@@ -888,6 +887,7 @@ iframe {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }

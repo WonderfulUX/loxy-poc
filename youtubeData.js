@@ -1,28 +1,8 @@
-import { configDotenv } from "dotenv"
-const API_KEY = process.env.API_KEY
+import dotenv from "dotenv"
+import { GoogleApis } from "googleapis"
 
-function start() {
-    // 2
-    gapi.client.init({
-        'apiKey': API_KEY,
-    }).then(() => retrieveFromYT('interviews'))
-        .then(videosDetailsFromYT)
-        .then(videosArray => feedSection(videosArray, 'interviews'))
-
-        .then(() => retrieveFromYT('oneshots'))
-        .then(videosDetailsFromYT)
-        .then(videosArray => feedSection(videosArray, 'oneshots'))
-
-        .then(() => retrieveFromYT('indeh'))
-        .then(videosDetailsFromYT)
-        .then(videosArray => feedSection(videosArray, 'indeh'))
-
-        .catch(throwRequestError)
-};
-// 1
-// gapi.load('client', start);
-
-
+dotenv.config()
+const YT_API_KEY = process.env.YT_API_KEY
 const YTqueryParams = {
     interviews: {
         playlistId: "PL70fD2645rWljll6GoR9Izpr_qd7eK7o4",
@@ -37,48 +17,56 @@ const YTqueryParams = {
         maxResults: 6,
     },
 }
+const YTdata = {
+    interviews: {},
+    oneshots: {},
+    indeh: {}
+}
 
 
-function retrieveFromYT(sectionName) {
+export async function retrieveYTdata() {
+    try {
+        const interviewsPlaylistData = await retrieveFromYT('interviews')
+        const interviewsEmbeddedFramesDetails = await videosDetailsFromYT(interviewsPlaylistData)
+        YTdata.interviews = interviewsEmbeddedFramesDetails
+
+        const oneshotsPlaylistData = await retrieveFromYT('oneshots')
+        const oneshotsEmbeddedFramesDetails = await videosDetailsFromYT(oneshotsPlaylistData)
+        YTdata.oneshots = oneshotsEmbeddedFramesDetails
+
+        const indehPlaylistData = await retrieveFromYT('indeh')
+        const indehEmbeddedFramesDetails = await videosDetailsFromYT(indehPlaylistData)
+        YTdata.indeh = indehEmbeddedFramesDetails
+        return YTdata
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+
+
+async function retrieveFromYT(sectionName) {
     const { playlistId, maxResults } = YTqueryParams[sectionName]     // console.log('retrieving'); // console.log(playlistId,maxResults,sectionName);    
-    return gapi.client.request({
-        'path': `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${playlistId}&part=snippet,id,contentDetails,status&maxResults=${maxResults}`,
-    })
+    const response = await fetch(
+        `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${playlistId}&part=snippet,id,contentDetails,status&maxResults=${maxResults}&key=${YT_API_KEY}`,
+    )
+    const data = await response.json()
+    // console.log("--- data ---", data);
+    return data
 }
 
 async function videosDetailsFromYT(response) {
-    console.log(response.result);
-    const items = response.result.items     // console.log(items);
+    console.log(response.items);
+    const items = response.items     // console.log(items);
     const idList = retrieveVideoIds(items)
-    return gapi.client.request({
-        'path': `https://www.googleapis.com/youtube/v3/videos?id=${idList}&part=contentDetails,id,liveStreamingDetails,localizations,paidProductPlacementDetails,player,recordingDetails,snippet,statistics,status,topicDetails`,
-    })
+    const framesDetails = await fetch(
+        `https://www.googleapis.com/youtube/v3/videos?id=${idList}&part=contentDetails,id,liveStreamingDetails,localizations,paidProductPlacementDetails,player,recordingDetails,snippet,statistics,status,topicDetails&key=${YT_API_KEY}`,
+    )
+    const data = await framesDetails.json()
+    console.log("--- data from function 2 ---", data);
+    return data
 }
-
-function feedSection(videosArray, sectionName) {
-    document.querySelector(`#${sectionName} .loading`).classList.remove('loading')
-    displayVideos(videosArray, sectionName)
-    displayImages(videosArray, sectionName)
-}
-
-
-function displayImages(videosArray, sectionName) {
-    const videos = videosArray.result.items  //console.log(videos);
-    for (let i = 0; i < videos.length; i++) {
-        const feedImg = document.createElement('img')
-        feedImg.src = videos[i].snippet.thumbnails.standard.url
-        feedImg.classList.add('cover')
-        document.querySelectorAll(`#${sectionName} .feed-element`)[i].appendChild(feedImg)
-    }
-}
-function displayVideos(videosArray, sectionName) {
-    const videos = videosArray.result.items  //console.log(videos);
-    for (let i = 0; i < videos.length; i++) {
-        document.querySelectorAll(`#${sectionName} .feed-element`)[i].innerHTML
-            = videos[i].player.embedHtml.replace('//', 'https://')
-    }
-}
-
 
 
 // UTILITIES
@@ -87,9 +75,6 @@ function retrieveVideoIds(items) {
     items.forEach(item => {
         idList.push(item.contentDetails.videoId)
     })
-
-    // console.log(`IDs LIST
-    //     ${idList.join()}`)
     return idList.join()
 }
 
