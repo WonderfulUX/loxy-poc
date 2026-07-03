@@ -34,7 +34,8 @@ function toggleMenu(e) {
 async function getYoutubeData() {
     const YTresponse = await fetch('/api/get-youtube-playlists-data')
     const YTdata = await YTresponse.json()
-    console.log(YTdata);
+    // console.log('******************************');
+    // console.log(YTdata);
 
     for (const category in YTdata) {
         feedSection(category, YTdata[category])

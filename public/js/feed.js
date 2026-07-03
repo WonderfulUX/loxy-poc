@@ -1,9 +1,11 @@
 // SPOTIFY
 export function buildPlaylistItem(data) {
+    // console.log(data);
+
     const playlistItem = document.createElement('div')
     playlistItem.classList.add('podcast-element')
     playlistItem.innerHTML = `
-            <a class="podcast-element-link" href="${data.href}">
+            <a class="podcast-element-link" href="https://open.spotify.com/episode/${data.id}" target="_blank">
                 <img class="podcast-element-img" src="${data.images[0].url}" >
                 <div class="podcast-element-content" >
                     <h4 class="podcast-element-title">${data.name}</h4>
@@ -33,10 +35,11 @@ window.onYouTubeIframeAPIReady = function () {
 
 
 export function feedSection(sectionName, sectionData) {
-    console.log(sectionName);
-    document.querySelector(`#${sectionName} .loading`).classList.remove('loading')
+    // console.log(sectionName);
+    // document.querySelector(`#${sectionName} .loading`).classList.remove('loading')
     displayVideos(sectionData.items, sectionName)
     displayImages(sectionData.items, sectionName)
+    updateSectionLink(sectionName, sectionData['playlistId']);
 }
 
 function displayImages(videosArray, sectionName) {
@@ -46,7 +49,7 @@ function displayImages(videosArray, sectionName) {
         feedImg.src = videosArray[i].snippet.thumbnails.standard.url
         feedImg.id = videosArray[i].id
         feedImg.classList.add('cover')
-        // document.querySelectorAll(`#${sectionName} .feed-element`)[i].appendChild(feedImg)
+        document.querySelectorAll(`#${sectionName} .feed-element`)[i].appendChild(feedImg)
     }
 }
 
@@ -63,6 +66,11 @@ function displayVideos(videosArray, sectionName) {
         // Use a helper function to avoid loop-scope issues
         initializePlayerWhenReady(targetId, video.id);
     });
+}
+
+function updateSectionLink(sectionName, sectionLinkId) {
+    const linkElement = document.querySelector(`#${sectionName} .pageLink`)
+    linkElement.setAttribute("href", `https://www.youtube.com/playlist?list=${sectionLinkId}`)
 }
 
 // This helper ensures each video gets its own polling interval and closure

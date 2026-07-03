@@ -28,15 +28,15 @@ export async function retrieveYTdata() {
     try {
         const interviewsPlaylistData = await retrieveFromYT('interviews')
         const interviewsEmbeddedFramesDetails = await videosDetailsFromYT(interviewsPlaylistData)
-        YTdata.interviews = interviewsEmbeddedFramesDetails
+        YTdata.interviews = { ...interviewsEmbeddedFramesDetails, playlistId: YTqueryParams['interviews'].playlistId }
 
         const oneshotsPlaylistData = await retrieveFromYT('oneshots')
         const oneshotsEmbeddedFramesDetails = await videosDetailsFromYT(oneshotsPlaylistData)
-        YTdata.oneshots = oneshotsEmbeddedFramesDetails
+        YTdata.oneshots = { ...oneshotsEmbeddedFramesDetails, playlistId: YTqueryParams['oneshots'].playlistId }
 
         const indehPlaylistData = await retrieveFromYT('indeh')
         const indehEmbeddedFramesDetails = await videosDetailsFromYT(indehPlaylistData)
-        YTdata.indeh = indehEmbeddedFramesDetails
+        YTdata.indeh = { ...indehEmbeddedFramesDetails, playlistId: YTqueryParams['indeh'].playlistId }
         return YTdata
     }
     catch (e) {
