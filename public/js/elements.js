@@ -31,6 +31,7 @@ const aboutOnstage = document.querySelector('#about-onstage')
 const aboutCorsair = document.querySelector('#about-corsair-loxymore')
 const aboutEntertainers = document.querySelector('#about-entertainers')
 const contactShorty = document.querySelector('.about #contact')
+const festivalTourGrid = document.querySelector('.festivaltour-grid')
 
 
 
@@ -61,5 +62,6 @@ export {
     aboutOnstage,
     aboutCorsair,
     aboutEntertainers,
-    contactShorty
+    contactShorty,
+    festivalTourGrid
 }

@@ -8,6 +8,7 @@ window.addEventListener("load", () => {
     el.interviewCTN && getSpotifyData()
     el.anchor && navObserver.observe(el.anchor)
     el.anchor && initNavigationObserver()
+    el.festivalTourGrid && initInfiniteSlide()
 }
 );
 
@@ -49,4 +50,24 @@ async function getSpotifyData() {
     // console.log(shortList);
     shortList.forEach(playlistItem => buildPlaylistItem(playlistItem));
     document.querySelector('.podcast-grid.loading').classList.remove('loading')
+}
+
+function initInfiniteSlide() {
+    const translationValue = el.festivalTourGrid.getBoundingClientRect().width / 2
+    const infiniteCarousel = el.festivalTourGrid.animate(
+        [{ translate: "0 0" }, { translate: `-${translationValue}px 0` }],
+        {
+            duration: 10000 * translationValue / innerWidth,
+            iterations: 'Infinity',
+            easing: "linear"
+
+        }
+
+    )
+    el.festivalTourGrid.addEventListener('mouseenter', (e) => {
+        infiniteCarousel.pause()
+    })
+    el.festivalTourGrid.addEventListener('mouseleave', (e) => {
+        infiniteCarousel.play()
+    })
 }

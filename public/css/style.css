@@ -992,12 +992,17 @@ footer {
 /* ABOUT */
 
 .about-section {
-    padding: 60px 80px;
+    padding: 60px 0;
+    overflow: hidden;
+}
+
+.about h2,
+.about p {
+    padding: 0 60px;
 }
 
 .about-section h2 {
     font-size: clamp(30px, 4vw, 50px);
-    padding-bottom: unset;
     text-align: left;
     margin-bottom: 24px;
 }
@@ -1024,6 +1029,7 @@ footer {
     width: fit-content;
     /* transition: padding 1s cubic-bezier(0.19, 1, 0.22, 1), width 1s cubic-bezier(0.19, 1, 0.22, 1);
     overflow: hidden; */
+    margin: 0 60px;
 }
 
 aside {
@@ -1183,13 +1189,20 @@ aside:hover p {
     transition: scale .8s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
-.about img:hover {
+/* .about img:hover {
     scale: 1.1;
+} */
+
+
+picture,
+.wide-element {
+    width: 95%;
+    margin: 0 auto;
 }
 
-.image-full {
-    width: 100%;
-    margin: 30px 0;
+picture {
+    display: block;
+    margin: 30px auto;
 }
 
 #whatisloxymore {
@@ -1240,7 +1253,6 @@ aside .link-position::before {
     align-items: center;
     justify-content: center;
     gap: 20px;
-    width: 100%;
     margin: 20px auto;
     height: 90vh;
 }
@@ -1282,16 +1294,24 @@ aside .link-position::before {
     object-fit: contain;
 }
 
-.parters-grid {
+.partners-grid {
     /* max-width: 700px; */
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-    width: 100%;
+    /* width: 100%; */
     background: white;
     border-radius: 20px;
     display: flex;
     padding: 50px;
+    align-items: center;
+}
+
+.partners-grid picture {
+    display: unset;
+    width: 120px;
+    margin: unset;
+    flex-grow: 0;
 }
 
 .about .entertainer-img {
@@ -1306,6 +1326,16 @@ aside .link-position::before {
     gap: 30px;
     align-items: center;
     margin: 40px 0;
+    padding: 60px;
+}
+
+.entertainer picture {
+    width: auto;
+    text-align: center;
+}
+
+.entertainer-content p {
+    padding: 0;
 }
 
 .oneshot-grid-item:nth-of-type(3) {
@@ -1320,11 +1350,11 @@ picture img {
 
 .oneshot-grid {
     display: grid;
-    width: 100%;
+    /* width: 100%; */
     grid-template-columns: 1.5fr 1fr;
     gap: 20px;
     align-items: baseline;
-    margin: 30px 0;
+    /* margin: 30px 0; */
 }
 
 .livestories-grid {
@@ -1333,7 +1363,7 @@ picture img {
     display: flex;
     justify-content: center;
     gap: 0;
-    margin: 30px 0;
+    margin: 30px auto;
     height: 90vh;
 }
 
@@ -1355,10 +1385,10 @@ picture img {
     rotate: -2deg;
 }
 
-#about-festivaltour {
+/* #about-festivaltour {
     padding-left: 0;
     padding-right: 0;
-}
+} */
 
 #about-festivaltour .scrollable-ctn {
     width: 100%;
@@ -1414,7 +1444,7 @@ picture img {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     align-items: center;
-    margin: 30px 0;
+    /* margin: 30px 0; */
 }
 
 .onstage-grid-item {
@@ -1530,13 +1560,32 @@ aside .about-quick-link {
         line-clamp: 4;
         -webkit-line-clamp: 4;
     }
+
+    .indeh-grid,
+    .livestories-grid {
+        height: unset;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .indeh-grid-item,
+    .livestories-grid-item {
+        width: 100%;
+        height: unset;
+    }
+
+    .indeh-grid-item:nth-of-type(1),
+    .indeh-grid-item:nth-of-type(3) {
+        scale: unset;
+    }
+
 }
 
 @media screen and (max-width: 1000px) {
     .entertainer {
         flex-direction: column;
         align-items: unset;
-        margin: 0 0 80px;
+        margin: 0;
     }
 
 
@@ -1629,7 +1678,24 @@ aside .about-quick-link {
     }
 
     .about-section {
-        padding: 40px;
+        padding: 40px 0;
+    }
+
+    .indeh-grid,
+    .livestories-grid,
+    .oneshot-grid {
+        gap: 10px;
+    }
+
+    .livestories-grid-item:nth-of-type(1),
+    .livestories-grid-item:nth-of-type(2),
+    .livestories-grid-item:nth-of-type(3) {
+        rotate: unset;
+    }
+
+    .img-corsair-loxymore {
+        max-width: 450px;
+        width: 95%;
     }
 }
 
@@ -1700,6 +1766,84 @@ aside .about-quick-link {
     .pageLink {
         margin: 30px auto;
     }
+
+    .about h2,
+    .about p {
+        padding: 0 20px;
+    }
+
+    .indeh-grid-item,
+    .livestories-grid-item {
+        height: 500px;
+        width: auto;
+    }
+
+    .oneshot-grid-item {
+        width: 80vw;
+    }
+
+    .onstage-grid picture {
+        width: 80vw;
+        height: 440px;
+    }
+
+    .onstage-grid img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .onstage-grid {
+        gap: 10px;
+    }
+
+    .indeh-grid,
+    .oneshot-grid,
+    .livestories-grid,
+    .onstage-grid {
+        display: flex;
+        margin: 0;
+        padding: 20px;
+        width: fit-content;
+        /* overflow: visible; */
+    }
+
+    .oneshot-grid-item:nth-of-type(2),
+    .oneshot-grid-item:nth-of-type(3) {
+        translate: unset;
+    }
+
+    .indeh-grid-item {
+        flex-shrink: 0;
+    }
+
+    .about-section .scrollable-ctn {
+        overflow: auto;
+        scrollbar-width: none;
+    }
+
+    .about .entertainer-img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .entertainer-content p {
+        padding: 0;
+    }
+
+    .entertainer {
+        padding: 60px 20px;
+    }
+
+    aside {
+        display: none;
+    }
+
+    .footer-decoration {
+        translate: -50% -70px;
+        bottom: 0;
+        top: unset;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -1724,14 +1868,6 @@ aside .about-quick-link {
         padding-left: 10px;
     }
 
-    aside {
-        display: none;
-    }
-
-    .about-section {
-        padding: 40px 20px;
-    }
-
     .feed-section h3 {
         font-weight: 900;
     }
@@ -1753,6 +1889,10 @@ aside .about-quick-link {
         translate: -50% -100px;
         bottom: 0;
         top: unset;
+    }
+
+    #page-links {
+        margin: 0 20px;
     }
 }
 
@@ -1777,5 +1917,10 @@ aside .about-quick-link {
 
     .footer-decoration {
         bottom: 10px;
+    }
+
+    .about .entertainer-img {
+        width: 200px;
+        height: 200px;
     }
 }
