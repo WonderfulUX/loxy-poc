@@ -37,19 +37,25 @@ window.onYouTubeIframeAPIReady = function () {
 export function feedSection(sectionName, sectionData) {
     // console.log(sectionName);
     // document.querySelector(`#${sectionName} .loading`).classList.remove('loading')
-    displayVideos(sectionData.items, sectionName)
+    // displayVideos(sectionData.items, sectionName)
     displayImages(sectionData.items, sectionName)
     updateSectionLink(sectionName, sectionData['playlistId']);
 }
 
 function displayImages(videosArray, sectionName) {
     //console.log(videos);
+
     for (let i = 0; i < videosArray.length; i++) {
+        console.log(videosArray);
         const feedImg = document.createElement('img')
         feedImg.src = videosArray[i].snippet.thumbnails.standard.url
         feedImg.id = videosArray[i].id
+        feedImg.setAttribute('width', 740)
+        feedImg.setAttribute('height', 480)
         feedImg.classList.add('cover')
-        document.querySelectorAll(`#${sectionName} .feed-element`)[i].appendChild(feedImg)
+
+        document.querySelectorAll(`#${sectionName} .feed-element-link`)[i].setAttribute('href', `https://www.youtube.com/watch?v=${videosArray[i].id}`)
+        document.querySelectorAll(`#${sectionName} .feed-element-link`)[i].appendChild(feedImg)
     }
 }
 
